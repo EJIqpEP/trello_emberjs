@@ -23,7 +23,13 @@
             <h1>{{listName}}</h1>
             {{#each card in cards itemController="card"}}
               <div class="card">
-                =={{card.description}}==
+                {{#if isEditing}}
+                  {{ view App.EditCardView }}
+                {{else}}
+                  <label>{{card.description}}</label>
+                  <div class="edit-small edit-card hand" {{action "editCard" on="click"}}>Edit</div>
+                  <div {{action "deleteCard" card}} class="remove-small remove-card hand">X</div>
+                {{/if}}
               </div>
             {{/each}}
             <a {{action "removeList"}} class="hand">

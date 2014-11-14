@@ -3,21 +3,21 @@ App.CardController = Ember.ObjectController.extend({
   // newList: null,
   // needs: ['lists'],
   //
-  // removeCardFromList: function() {
-  //   var card = this.get('model'),
-  //     list = card.get('list');
-  //   list.get('cards').removeObject(card);
-  // },
-  //
-  // updateModel: function(cardMethod) {
-  //   var card = this.get('model');
-  //
-  //   if (cardMethod && cardMethod in card) {
-  //     card[cardMethod]();
-  //   }
-  //
-  //   card.save();
-  // },
+  removeCardFromList: function() {
+    var card = this.get('model'),
+      list = card.get('list');
+    list.get('cards').removeObject(card);
+  },
+
+  updateModel: function(cardMethod) {
+    var card = this.get('model');
+
+    if (cardMethod && cardMethod in card) {
+      card[cardMethod]();
+    }
+
+    card.save();
+  },
   //
   // updateList: function() {
   //
@@ -42,9 +42,11 @@ App.CardController = Ember.ObjectController.extend({
       this.set('isEditing', true);
     },
 
-    deleteCard: function() {
-      this.removeCardFromList();
-      this.updateModel('deleteRecord');
+    deleteCard: function(card) {
+      console.log('del', card);
+      card.destroyObject();
+      // this.removeCardFromList();
+      // this.updateModel('deleteRecord');
     },
 
     updateCard: function() {
