@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+  <script type="text/x-handlebars" data-template-name="application">
+    <header>
+      <div class="row">
+        <h1 class="app-name left">Trello</h1>
+      </div>
+    </header>
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="lists">
+    <section id="lists-container" class="lists-container">
+      <div class="row">
+        {{#each controller itemController="list"}}
+        <section class="list list-inline">
+          <h1>{{listName}}</h1> {{#each card in cards itemController="card"}}
+          <div class="card">
+            ololo {{#if isEditing}} {{ view App.EditCardView }} {{else}}
+            <label>{{description}}</label>
+            <div class="edit-small edit-card hand" {{action "editCard" on="click" }}></div>
+            <div {{action "deleteCard"}} class="remove-small remove-card hand"></div>
+            {{/if}}
+          </div>
+          {{/each}}
+          <a {{action "removeList"}} class="hand">
+            <div class="remove remove-list"></div>
+          </a>
+
+          <section class="new-card">
+            {{input type="text" value=cardDescription action="createCard" class="card-input" placeholder="New Card"}}
+          </section>
+        </section>
+        {{/each}}
+        <section class="list new-list list-inline">
+          {{input type="text" value=listName action="createList" id="new-list" class="list-input" placeholder="New List"}}
+        </section>
+      </div>
+    </section>
+  </script>
+
+  <script src="js/libs/jquery-1.11.1.js"></script>
+  <script src="js/libs/handlebars-v1.3.0.js"></script>
+  <script src="js/libs/ember-1.8.1.js"></script>
+  <script src="js/libs/ember-data-v1.0.0-beta.11.js"></script>
+  <script src="js/libs/localstorage_adapter.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/adapter.js"></script>
+
+  <script src="js/routes/lists-route.js"></script>
+
+  <script src="js/models/list.js"></script>
+  <script src="js/models/card.js"></script>
+
+  <script src="js/controllers/list-controller.js"></script>
+  <script src="js/controllers/lists-controller.js"></script>
+  <script src="js/controllers/card-controller.js"></script>
+</body>
+
+
+</html>
