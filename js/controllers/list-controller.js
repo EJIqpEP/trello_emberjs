@@ -2,9 +2,7 @@ App.ListController = Ember.ObjectController.extend({
   actions: {
     removeList: function() {
       var list = this.get('model');
-
-      list.deleteRecord();
-      list.save();
+      list.destroyRecord();
     },
     createCard: function() {
       var list = this.get('model'),

@@ -2,6 +2,9 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.min.css">
+  <link rel="stylesheet" href="css/trello.css">
 </head>
 
 <body>
@@ -19,26 +22,23 @@
     <section id="lists-container" class="lists-container">
       <div class="row">
         {{#each controller itemController="list"}}
-          <section class="list list-inline">
-            <h1>{{listName}}</h1>
-            {{#each card in cards itemController="card"}}
-              <div class="card">
-                {{#if isEditing}}
-                  {{ view App.EditCardView }}
-                {{else}}
-                  <label>{{card.description}}</label>
-                  <div class="edit-small edit-card hand" {{action "editCard" on="click"}}>Edit</div>
-                  <div {{action "deleteCard" card}} class="remove-small remove-card hand">X</div>
-                {{/if}}
-              </div>
-            {{/each}}
-            <a {{action "removeList"}} class="hand">
-              <div class="remove remove-list">X</div>
-            </a>
-            <section class="new-card">
-              {{input type="text" value=cardDescription action="createCard" class="card-input" placeholder="New Card"}}
-            </section>
+        <section class="list list-inline">
+          <h1>{{listName}}</h1> {{#each card in cards itemController="card"}}
+          <div class="card">
+            {{#if isEditing}} {{ view App.EditCardView }} {{else}}
+            <label>{{card.description}}</label>
+            <div class="edit-small edit-card hand" {{action "editCard" on="click" }}></div>
+            <div {{action "deleteCard" card}} class="remove-small remove-card hand"></div>
+            {{/if}}
+          </div>
+          {{/each}}
+          <a {{action "removeList"}} class="hand">
+            <div class="remove remove-list"></div>
+          </a>
+          <section class="new-card">
+            {{input type="text" value=cardDescription action="createCard" class="card-input" placeholder="New Card"}}
           </section>
+        </section>
         {{/each}}
         <section class="list new-list list-inline">
           {{input type="text" value=listName action="createList" id="new-list" class="list-input" placeholder="New List"}}
@@ -51,11 +51,9 @@
   <script src="js/libs/handlebars-v1.3.0.js"></script>
   <script src="js/libs/ember-1.8.1.js"></script>
   <script src="js/libs/ember-data-v1.0.0-beta.11.js"></script>
-  <script src="js/libs/localstorage_adapter.js"></script>
 
   <script src="js/app.js"></script>
   <script src="js/router.js"></script>
-  <script src="js/adapter.js"></script>
 
   <script src="js/routes/lists-route.js"></script>
 
