@@ -1,4 +1,5 @@
 App.ListController = Ember.ObjectController.extend({
+  needs: ['lists'],
   actions: {
     removeList: function() {
       var list = this.get('model');
@@ -13,13 +14,7 @@ App.ListController = Ember.ObjectController.extend({
         list: list
       });
 
-      card.save().then(function() {
-        var cards = list.get('cards');
-        cards.then(function() {
-          cards.pushObject(card);
-          list.save();
-        });
-      });
+      card.save();
 
       this.set('cardDescription', '');
     },
